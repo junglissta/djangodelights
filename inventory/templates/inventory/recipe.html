@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Django Delights{% endblock %}
+{% block content %}
+  <div>
+    <h2>Recipes</h2>
+    <a href="{% url "create_recipe" %}">Create new Recipe</a>
+    <table>
+      <thead>
+        <tr>
+          <th>Menu Item</th>
+          <th>Ingredient</th>
+          <th>Quantity</th>
+          <th>Unit</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for item in object_list %}
+        <tr>
+          <td> {{ item.menu_item.name }}</td>
+          <td>
+            <a href="{% url "update_recipe" item.id %}">{{ item.ingredient.name }}</a>
+          </td>
+          <td> {{ item.quantity }}</td>
+          <td> {{ item.ingredient.quantity_type }}</td>
+          <td><a href="{% url "delete_recipe" item.id %}">❌</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+{% endblock %}

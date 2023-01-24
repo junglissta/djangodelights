@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Django Delights{% endblock %}
+{% block content %}
+  <div>
+    <h2>Menu Items</h2>
+    <a href="{% url "create_purchase" %}">Add a new Purchase</a>
+    <table>
+      <thead>
+        <tr>
+          <th>Menu Item</th>
+          <th>Price</th>
+          <th>Timestamp</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for Purchase in object_list %}
+        <tr>
+          <td>
+            <a href="">{{ Purchase.menu_item.name }}</a>
+          </td>
+          <td> ${{ Purchase.menu_item.price }}</td>
+          <td> {{ Purchase.timestamp }}</td>
+          <td><a href="">❌</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
