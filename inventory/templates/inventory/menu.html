@@ -1,34 +1,33 @@
 {% extends 'base.html' %}
-{% load static %}
-
+{% load static %} 
+{% block title %}Django Delights{% endblock %}
 {% block head %}
 {% endblock %}
-
 {% block content %}
-<h2>Menu</h2>
-    <table class="inventory-table">
-        <a href="{% url 'create_menu' %}">Create new menu</a>
-        <thead>
-            <tr>
-              <th>Name</th>
-              <th>Price</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-          {% for item in object_list %}
-            <tr>
-              <td>
-                <a href="{% url "update_recipe" item.id %}">{{ item.name }}</a>
-              </td>
-              <td> ${{ item.price }}</td>
-              <td><a href="{% url "delete_menu" item.id %}">❌</a></td>
-            </tr>
-          {% endfor %}
-          </tbody>
+    <div>
+        <h2>Menu</h2>
+        <a href="{% url 'create_menu' %}">Add New Item to Menu</a>
         
+        <table>
+            <thead>
+                <tr>
+                    <th>Menu Item</th>
+                    <th>Unit</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in object_list %}
+                <tr>
+                    <td><a href="{% url 'update_recipe' item.id %}">{{ item.name }}</a> </td>
+                    <td> {{ item.price }}</td>
+                    <td><a href="{% url "delete_menu" item.id %}"><button class="del-button">Delete</button></a></td>
+                </tr>
+                {% endfor %}
+      </tbody>
     </table>
 
+  </div>
 {% endblock %}
 
 

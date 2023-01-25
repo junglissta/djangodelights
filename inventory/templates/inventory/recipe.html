@@ -24,7 +24,7 @@
           </td>
           <td> {{ item.quantity }}</td>
           <td> {{ item.ingredient.quantity_type }}</td>
-          <td><a href="{% url "delete_recipe" item.id %}">❌</a></td>
+          <td><a href="{% url "delete_recipe" item.id %}"><button class="del-button">Delete</button></a></td>
         </tr>
       {% endfor %}
       </tbody>

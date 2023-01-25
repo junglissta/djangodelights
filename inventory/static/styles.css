@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@100&display=swap');
+
+html {
+    font-family: 'Sofia Sans', sans-serif;
+    font-weight: bold;
+}
+
+nav {
+    background-color: #333;
+    overflow: hidden;
+}
+
+.navbar a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+.navbar a.nav-logo {
+    background-color: #04AA6D;
+    color: white;
+  }
+.navbar a.nav-logout {
+    background-color: #905aa8;
+    color: white;
+  }
+.navbar a.nav-link {
+    justify-content: flex-end;
+  }
+
+.del-button {
+    background-color: #333;
+    color: #ddd;
+    font-family: 'Sofia Sans', sans-serif;
+    border-radius: 10px;
+    transition: 1s;
+}
+.del-button:hover {
+    background-color: red;
+}

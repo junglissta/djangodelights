@@ -48,7 +48,7 @@ class MenuUpdate(LoginRequiredMixin, UpdateView):
     model = MenuItem
 
 class MenuDelete(LoginRequiredMixin, DeleteView):
-    template_name = 'inventory/delete_menu'
+    template_name = 'inventory/delete_menu.html'
     model = MenuItem
     success_url = '/menu'
 
@@ -68,7 +68,8 @@ class RecipeUpdate(LoginRequiredMixin, UpdateView):
 
 class RecipeDelete(LoginRequiredMixin, DeleteView):
     template_name = 'inventory/delete_recipe.html'
-    success_url = '/'
+    model = RecipeRequirements
+    success_url = '/recipe'
 
 class PurchaseView(LoginRequiredMixin, ListView):
     model = Purchase
@@ -78,6 +79,7 @@ class PurchaseCreate(LoginRequiredMixin, CreateView):
     template_name = 'inventory/add_purchase.html'
     model = Purchase
     form_class = PurchaseForm
+
 
 def signout(request):
     logout(request)
