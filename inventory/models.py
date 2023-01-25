@@ -36,18 +36,17 @@ class RecipeRequirements(models.Model):
 
 class Purchase(models.Model):
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
-    timestamp = models.DateTimeField(auto_now=True)
+    timestamp = models.DateField(auto_now=True)
 
     def get_absolute_url(self):
-        return '/purchase'
+      return "/purchase"
 
     def get_cost(self):
-        recipes = RecipeRequirements.objects.filter(menu_item=self.menu_item)
-        return sum([i.ingredient.unit_price * i.quantity for i in recipes])
+        recipe_objects = RecipeRequirements.objects.filter(menu_item=self.menu_item)
+        return sum([i.ingredient.unit_price * i.quantity for i in recipe_objects])
 
     def get_revenue(self):
         return self.menu_item.price
 
     def get_profit(self):
         return float(self.get_revenue()) - float(self.get_cost())
-    

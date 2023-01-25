@@ -19,7 +19,7 @@
           {% for item in object_list %}
             <tr>
               <td>
-                <a href="{% url "update_menu" item.id %}">{{ item.name }}</a>
+                <a href="{% url "update_recipe" item.id %}">{{ item.name }}</a>
               </td>
               <td> ${{ item.price }}</td>
               <td><a href="{% url "delete_menu" item.id %}">❌</a></td>

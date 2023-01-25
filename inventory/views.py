@@ -9,72 +9,76 @@ from django.core.exceptions import SuspiciousOperation
 from .models import Ingredient, MenuItem, Purchase, RecipeRequirements
 from .forms import IngredientForm, MenuItemForm, RecipeRequirementForm, PurchaseForm
 
-# Create your views here.
-def home(request):
-    return render(request, 'inventory/home.html')
 
-class IngredientView(ListView):
+class HomeView(LoginRequiredMixin, TemplateView):
+    template_name = "inventory/home.html"
+
+class IngredientView(LoginRequiredMixin, ListView):
     model = Ingredient
     template_name = 'inventory/ingredients.html'
 
-class IngredientCreate(CreateView):
+class IngredientCreate(LoginRequiredMixin, CreateView):
     template_name = 'inventory/add_ingredient.html'
     model = Ingredient
     form_class = IngredientForm
 
-class IngredientUpdate(UpdateView):
+class IngredientUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'inventory/update_ingredient.html'
     form_class = IngredientForm
     model = Ingredient
 
-class IngredientDelete(DeleteView):
+class IngredientDelete(LoginRequiredMixin, DeleteView):
     template_name = 'inventory/delete_ingredient.html'
     model = Ingredient
     success_url = '/ingredients'
 
 
-class MenuView(ListView):
+class MenuView(LoginRequiredMixin, ListView):
     template_name = 'inventory/menu.html'
     model = MenuItem
 
-class MenuCreate(CreateView):
+class MenuCreate(LoginRequiredMixin, CreateView):
     template_name = 'inventory/add_menu.html'
     model = MenuItem
     form_class = MenuItemForm
 
-class MenuUpdate(UpdateView):
+class MenuUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'inventory/update_menu.html'
     form_class = MenuItemForm
     model = MenuItem
 
-class MenuDelete(DeleteView):
+class MenuDelete(LoginRequiredMixin, DeleteView):
     template_name = 'inventory/delete_menu'
     model = MenuItem
     success_url = '/menu'
 
-class RecipeView(ListView):
+class RecipeView(LoginRequiredMixin, ListView):
     template_name = 'inventory/recipe.html'
     model = RecipeRequirements
 
-class RecipeCreate(CreateView):
+class RecipeCreate(LoginRequiredMixin, CreateView):
     template_name = 'inventory/add_recipe.html'
     model = RecipeRequirements
     form_class = RecipeRequirementForm
 
-class RecipeUpdate(UpdateView):
+class RecipeUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'inventory/update_recipe.html'
     model = RecipeRequirements
     form_class = RecipeRequirementForm
 
-class RecipeDelete(DeleteView):
+class RecipeDelete(LoginRequiredMixin, DeleteView):
     template_name = 'inventory/delete_recipe.html'
     success_url = '/'
 
-class PurchaseView(ListView):
+class PurchaseView(LoginRequiredMixin, ListView):
     model = Purchase
     template_name = 'inventory/purchase.html'
 
-class PurchaseCreate(CreateView):
+class PurchaseCreate(LoginRequiredMixin, CreateView):
     template_name = 'inventory/add_purchase.html'
     model = Purchase
     form_class = PurchaseForm
+
+def signout(request):
+    logout(request)
+    return redirect('/')

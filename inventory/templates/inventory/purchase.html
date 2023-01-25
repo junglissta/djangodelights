@@ -15,13 +15,13 @@
         </tr>
       </thead>
       <tbody>
-      {% for Purchase in object_list %}
+      {% for purchase in object_list %}
         <tr>
           <td>
-            <a href="">{{ Purchase.menu_item.name }}</a>
+            <a href="">{{ purchase.menu_item.name }}</a>
           </td>
-          <td> ${{ Purchase.menu_item.price }}</td>
-          <td> {{ Purchase.timestamp }}</td>
+          <td> ${{ purchase.menu_item.price }}</td>
+          <td> {{ purchase.timestamp }}</td>
           <td><a href="">❌</a></td>
         </tr>
       {% endfor %}

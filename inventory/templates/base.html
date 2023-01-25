@@ -11,6 +11,7 @@
     <header class="header">
       <nav class="navbar">
         <a href="{% url 'home' %}"  class="nav-logo">Home</a>
+        <a class="nav-item" href="{% url 'logout' %}">Log Out</a>
         <ul class="nav-menu">
           <li class="nav-item">
             <a href="{% url 'ingredients' %}" class="nav-link">Ingredients</a>
@@ -24,7 +25,6 @@
           <li class="nav-item">
             <a href="{% url 'recipe' %}" class="nav-link">Recipes</a>
           </li>
-  
               </ul>
               <div class="hamburger">
                 <span class="bar"></span>
