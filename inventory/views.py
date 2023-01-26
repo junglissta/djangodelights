@@ -12,6 +12,7 @@ from .forms import IngredientForm, MenuItemForm, RecipeRequirementForm, Purchase
 
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = "inventory/home.html"
+   
 
 class IngredientView(LoginRequiredMixin, ListView):
     model = Ingredient
@@ -75,10 +76,67 @@ class PurchaseView(LoginRequiredMixin, ListView):
     model = Purchase
     template_name = 'inventory/purchase.html'
 
-class PurchaseCreate(LoginRequiredMixin, CreateView):
-    template_name = 'inventory/add_purchase.html'
+class PurchaseCreate(LoginRequiredMixin, TemplateView):
+    template_name = "inventory/add_purchase.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["menu_items"] = [i for i in MenuItem.objects.all() if i.available()]
+        return context
+
+    def post(self, request):
+        menu_item_id = request.POST["menu_item"]
+        menu_item = MenuItem.objects.get(pk=menu_item_id)
+        requirements = menu_item.reciperequirements_set
+        purchase = Purchase(menu_item=menu_item)
+
+        for requirement in requirements.all():
+            required_ingredient = requirement.ingredient
+            required_ingredient.quantity -= requirement.quantity
+            required_ingredient.save()
+
+        purchase.save()
+        return redirect("/purchase")
+
+class PurchaseDelete(LoginRequiredMixin, DeleteView):
+    template_name = 'inventory/delete_purchase.html'
     model = Purchase
-    form_class = PurchaseForm
+    success_url = '/purchase'
+
+class FinanceView(LoginRequiredMixin, TemplateView):
+    template_name = 'inventory/finance.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cost'] = round(sum([p.get_cost() for p in Purchase.objects.all()]), 2)
+        context['revenue'] = round(sum([p.get_revenue() for p in Purchase.objects.all()]), 2)
+        context['profit'] = round(sum([p.get_profit() for p in Purchase.objects.all()]), 2)
+        
+
+        return context
+
+
+
+class ReportView(LoginRequiredMixin, TemplateView):
+    template_name = "inventory/reports.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["purchases"] = Purchase.objects.all()
+        revenue = Purchase.objects.aggregate(
+            revenue=Sum("menu_item__price"))["revenue"]
+        total_cost = 0
+        for purchase in Purchase.objects.all():
+            for recipe_requirement in purchase.menu_item.reciperequirement_set.all():
+                total_cost += recipe_requirement.ingredient.price_per_unit * \
+                    recipe_requirement.quantity
+
+        context["revenue"] = revenue
+        context["total_cost"] = total_cost
+        context["profit"] = revenue - total_cost
+
+        return context
+
 
 
 def signout(request):

@@ -19,6 +19,8 @@ urlpatterns = [
     path('recipe/<pk>/delete', views.RecipeDelete.as_view(), name='delete_recipe'),
     path('purchase/', views.PurchaseView.as_view(), name='purchase'),
     path('purchase/new', views.PurchaseCreate.as_view(), name='create_purchase'),
+    path('purchase/<pk>/delete', views.PurchaseDelete.as_view(), name='delete_purchase'),
+    path('finance/', views.FinanceView.as_view(), name='finance'),
     path("logout/", views.signout, name="logout"),
     path("accounts/login/", view.LoginView.as_view(), name="login")
 ]

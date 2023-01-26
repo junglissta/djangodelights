@@ -6,13 +6,11 @@
 {% endblock %}
 
 {% block content %}
-<h1>Welcome</h1>
+{% if user.is_authenticated %}
+  <h1>Welcome, {{ user.username }}!</h1>
 <main id="grid">
-  <p id="first">lksdjfisdfkljlas kldjfkl jalskf kljf askljaslkf kladjf lkjf aslk fjl kalsjdf klj fklasjf</p>
-  <p id="second">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna a commodo suscipit, velit leo malesuada elit, a tristique mauris orci euismod purus.</p>
-  <p id="third">aeljdslfkjlkekldjvlsdj lkjsdflksjf lkjdflkasjf lkjdfj fklsjflk jl fjlaksj</p>
-  <p id="fourth"> lkasdjf  jlaksdfjjfeisljmvnvl jfkldsjpaw k lksdjflsk kljf lkjflaskj flsj klsdjf ljfoawj fkl ldsakj flafj oa lvnjsfoiejf </p>
-  <p id="fifth">I am writing as fasat as i can but it doesnt even compare to fast writing bitches</p>
+  <p id="first">This is a final project for CODECADEMY: build python web apps with django. Knowledge used in this project: Models, Creating new Instances to database, Deleting Instances from database, Updating database, Forms, Login authentication, basic styling in CSS</p>
   
 </main>
+{% endif %}
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block content %}
+<h2>Finance</h2>
+    <table class="inventory-table">
+        <thead>
+            <tr>
+                <th>Revenue</th>
+                <th>Cost</th>
+                <th>Profit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ revenue }}</td>
+                <td>{{ cost }}</td>
+                <td>{{ profit }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

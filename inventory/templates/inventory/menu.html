@@ -6,9 +6,9 @@
 {% block content %}
     <div>
         <h2>Menu</h2>
-        <a href="{% url 'create_menu' %}">Add New Item to Menu</a>
+        <a href="{% url 'create_menu' %}"><button class="create-button">ADD NEW MENU</button></a>
         
-        <table>
+        <table class="inventory-table">
             <thead>
                 <tr>
                     <th>Menu Item</th>
@@ -19,9 +19,10 @@
             <tbody>
                 {% for item in object_list %}
                 <tr>
-                    <td><a href="{% url 'update_recipe' item.id %}">{{ item.name }}</a> </td>
-                    <td> {{ item.price }}</td>
+                    <td>{{ item.name }}</td>
+                    <td> {{ item.price }} €</td>
                     <td><a href="{% url "delete_menu" item.id %}"><button class="del-button">Delete</button></a></td>
+                    <td><a href="{% url "update_menu" item.id %}"><button class="update-button">Update</button></a></td>
                 </tr>
                 {% endfor %}
       </tbody>

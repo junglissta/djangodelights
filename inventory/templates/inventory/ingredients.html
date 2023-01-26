@@ -7,7 +7,7 @@
 {% block content %}
 <h2>Ingredients</h2>
     <table class="inventory-table">
-        <a href="{% url 'create_ingredient' %}">Create Ingredient</a>
+        <a href="{% url 'create_ingredient' %}"><button class="create-button">ADD INGREDIENT</button></a>
         <thead>
             <tr>
                 <th>Name</th>
@@ -19,13 +19,12 @@
         <tbody>
         {% for ingredient in object_list %}
             <tr>
-                <td>
-                <a href="{% url "update_ingredient" ingredient.id %}">{{ ingredient.name }}</a>
-                </td>
+                <td>{{ ingredient.name }}</td>
                 <td>{{ ingredient.quantity }}</td>
                 <td>{{ ingredient.quantity_type }}</td>
-                <td class="price">${{ ingredient.price|stringformat:".2f" }}</td>
+                <td class="price">{{ ingredient.price|stringformat:".2f" }} €</td>
                 <td><a href="{% url "delete_ingredient" ingredient.id %}"><button class="del-button">Delete</button></a></td>
+                <td><a href="{% url "update_ingredient" ingredient.id %}"><button class="update-button">Update</button></a></td>
             </tr>
         {% endfor %}
         </tbody>

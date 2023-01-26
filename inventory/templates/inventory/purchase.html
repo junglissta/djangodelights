@@ -4,8 +4,8 @@
 {% block content %}
   <div>
     <h2>Menu Items</h2>
-    <a href="{% url "create_purchase" %}">Add a new Purchase</a>
-    <table>
+    <a href="{% url "create_purchase" %}"><button class="create-button">ADD PURCHASE</button></a>
+    <table class="inventory-table">
       <thead>
         <tr>
           <th>Menu Item</th>
@@ -22,7 +22,7 @@
           </td>
           <td> ${{ purchase.menu_item.price }}</td>
           <td> {{ purchase.timestamp }}</td>
-          <td><a href=""><button class="del-button">Delete</button></a></td>
+          <td><a href="{% url "delete_purchase" purchase.id %}"><button class="del-button">Delete</button></a></td>
         </tr>
       {% endfor %}
       </tbody>
